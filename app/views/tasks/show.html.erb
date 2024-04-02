@@ -1,0 +1,30 @@
+<% content_for(:title, @task.id.to_s + " - " + @task.title + " | " + Current.user.first_name + " " + Current.user.last_name ) %>
+
+<div class="container">
+  <div class="card mt-4">
+    <div class="card-header" style="<%= task_status_background(@task.status) %>">
+      <h5 class="card-title"><%= @task.title %></h5>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><strong>Description:</strong></p>
+      <p><%= @task.description %></p>
+      <ul class="list-unstyled">
+        <li><strong>Task ID:</strong> <%= @task.id %></li>
+        <li><strong>Status:</strong> <%= status_string(@task.status) %></li>
+        <li><strong>Priority:</strong> <%= priority_string(@task.priority) %></li>
+        <li><strong>Department:</strong> <%= @task.department.name %></li>
+        <li><strong>Due Date:</strong> <%= @task.due_date %></li>
+        <li><strong>Assigned to:</strong> <%= @task.assignee.first_name + " " + @task.assignee.last_name + " (" + @task.assignee.email + ")" %></li>        
+        <% if @task.verifier_id.present? %>
+          <li><strong>Verified by:</strong> <%= @task.verifier.first_name + " " + @task.verifier.last_name %> (<%= @task.verifier.email %>)</li>
+        <% end %>
+        <li><strong>Created at:</strong> <%= @task.created_at.strftime("%d-%m-%Y %H:%M") %></li>
+        <li><strong>Updated at:</strong> <%= @task.updated_at.strftime("%d-%m-%Y %H:%M") %></li>
+      </ul>
+      <div class="btn-group" role="group">
+        <%= link_to "Edit Task", edit_task_path(@task), class: "btn btn-primary mr-2" %>
+        <%= link_to "Delete", task_path(@task), data: { confirm: "Are you sure you want to delete this task?", turbo_method: :delete }, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>

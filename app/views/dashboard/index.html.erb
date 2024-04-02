@@ -1,0 +1,91 @@
+<% content_for(:title, "Dashboard | " + Current.user.email) %>
+
+<div class="container">
+  <h2 class="mt-4">Dashboard</h2>
+
+  <h3 class="mt-4">Tasks created by me: </h3>
+
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title">Total Tasks</h5>
+          <p class="card-text"><%= @total_tasks %></p>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Task Completion Percentage</h5>
+          <p class="card-text"><%= @completion_percentage %> %</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title">Tasks by Status</h5>
+          <ul class="list-group">
+            <% @tasks_by_status.each do |status, count| %>
+              <li class="list-group-item"><%= status_string(status) %> - <%= count %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title">Tasks by Priority</h5>
+          <ul class="list-group">
+            <% @tasks_by_priority.each do |priority, count| %>
+              <li class="list-group-item"><%= priority_string(priority) %> - <%= count %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="mt-4">Tasks assigned to me:</h3>
+
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title">Total Tasks</h5>
+          <p class="card-text"><%= @total_assigned_tasks %></p>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Task Completion Percentage</h5>
+          <p class="card-text"><%= @completion_assigned_percentage %> %</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title">Tasks by Status</h5>
+          <ul class="list-group">
+            <% @assigned_tasks_by_status.each do |status, count| %>
+              <li class="list-group-item"><%= status_string(status) %> - <%= count %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-light">
+        <div class="card-body">
+          <h5 class="card-title">Tasks by Priority</h5>
+          <ul class="list-group">
+            <% @assigned_tasks_by_priority.each do |priority, count| %>
+              <li class="list-group-item"><%= priority_string(priority) %> - <%= count %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 text-muted">
+    More features coming soon...
+  </div>
+</div>

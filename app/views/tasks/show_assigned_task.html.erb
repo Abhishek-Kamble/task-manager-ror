@@ -1,0 +1,43 @@
+<% content_for(:title, @task.title + " | " + Current.user.email ) %>
+
+<div class="container">
+  <div class="card mt-4">
+    <div class="card-header" style="<%= task_status_background(@task.status) %>">
+      <h5 class="card-title"><%= @task.title %></h5>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><strong>Description:</strong></p>
+      <p><%= @task.description %></p>
+      <ul class="list-unstyled">
+        <li><strong>Task ID:</strong> <%= @task.id %></li>
+        <li><strong>Status:</strong> <%= status_string(@task.status) %></li>
+        <li><strong>Priority:</strong> <%= priority_string(@task.priority) %></li>
+        <li><strong>Department:</strong> <%= @task.department.name %></li>
+        <li><strong>Due Date:</strong> <%= @task.due_date %></li>
+        <li><strong>Assigned to:</strong> <%= @task.assignee.first_name + " " + @task.assignee.last_name + " (" + @task.assignee.email + ")" %></li>
+        <% if @task.verifier_id.present? %>
+          <li><strong>Verified by:</strong> <%= @task.verifier.first_name + " " + @task.verifier.first_name %> (<%= @task.verifier.email %>)</li>
+        <% end %>
+        <li><strong>Created at:</strong> <%= @task.created_at.strftime("%d-%m-%Y %H:%M") %></li>
+        <li><strong>Updated at:</strong> <%= @task.updated_at.strftime("%d-%m-%Y %H:%M") %></li>
+      </ul>
+      <% if @task.verifier_id.present? && @task.status == 3%>
+        <div class="btn-group" role="group">
+          <%= link_to "This task is completed.", show_assigned_task_path(@task), class: "btn btn-info" %>
+        </div>
+      <% elsif @task.verifier_id.present? && @task.status == 2%>
+        <div class="btn-group" role="group">
+          <%= link_to "Mark task as completed", mark_complete_path(@task), data: { turbo_method: :put }, class: "btn btn-success" %>
+        </div>
+      <% elsif @task.verifier_id.present? %>
+        <div class="btn-group" role="group">
+          <%= link_to "Acknowledge task", acknowledge_task_path(@task), data: { turbo_method: :put }, class: "btn btn-primary" %>
+        </div>
+      <% else %>
+        <div class="btn-group" role="group">
+          <%= link_to "Waiting for verification", show_assigned_task_path(@task), class: "btn btn-secondary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

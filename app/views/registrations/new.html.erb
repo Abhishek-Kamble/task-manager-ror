@@ -1,0 +1,67 @@
+<% content_for(:title, "Sign Up | Task Manager") %>
+
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center mb-4">Sign Up Here</h1>
+
+          <div class="text-center mb-4">
+            <img src="https://abhishekkamble.s3.ap-south-1.amazonaws.com/portfolio-images/Sample_User_Icon.png" alt="Logo" class="rounded-circle" style="width: 100px; height: 100px;">
+          </div>
+
+          <%= form_with model: @user, url: signup_path do |form| %>
+            <% if @user.errors.any? %>
+              <div class="alert alert-danger">
+                <% @user.errors.full_messages.each do |message| %>
+                  <div><%= message %></div>
+                <% end %>
+              </div>
+            <% end %>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <%= form.label :first_name, class: "form-label" %>
+                <%= form.text_field :first_name, class: "form-control", placeholder: "Enter your first name" %>
+              </div>
+              <div class="col-md-6">
+                <%= form.label :last_name, class: "form-label" %>
+                <%= form.text_field :last_name, class: "form-control", placeholder: "Enter your last name" %>
+              </div>
+            </div>
+            <div class="mb-3">
+              <%= form.label :email, class: "form-label" %>
+              <%= form.text_field :email, class: "form-control", placeholder: "Enter your email" %>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <%= form.label :date_of_birth, class: "form-label" %>
+                <%= form.date_field :date_of_birth, class: "form-control" %>
+              </div>
+              <div class="col-md-6">
+                <%= form.label :department, class: "form-label" %>
+                <%= form.select :department_id, options_for_select(@departments), {}, class: "form-select" %>
+              </div> 
+            </div>
+            <div class="mb-3">
+              <%= form.label :country, class: "form-label" %>
+              <%= form.select :country, [ "Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas (the)", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia (Plurinational State of)", "Bonaire, Sint Eustatius and Saba", "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory (the)", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Cayman Islands (the)", "Central African Republic (the)", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands (the)", "Colombia", "Comoros (the)", "Congo (the Democratic Republic of the)", "Congo (the)", "Cook Islands (the)", "Costa Rica", "Croatia", "Cuba", "Curaçao", "Cyprus", "Czechia", "Côte d'Ivoire", "Denmark", "Djibouti", "Dominica", "Dominican Republic (the)", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Falkland Islands (the) [Malvinas]", "Faroe Islands (the)", "Fiji", "Finland", "France", "French Guiana", "French Polynesia", "French Southern Territories (the)", "Gabon", "Gambia (the)", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard Island and McDonald Islands", "Holy See (the)", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea (the Democratic People's Republic of)", "Korea (the Republic of)", "Kuwait", "Kyrgyzstan", "Lao People's Democratic Republic (the)", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands (the)", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia (Federated States of)", "Moldova (the Republic of)", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands (the)", "New Caledonia", "New Zealand", "Nicaragua", "Niger (the)", "Nigeria", "Niue", "Norfolk Island", "Northern Mariana Islands (the)", "Norway", "Oman", "Pakistan", "Palau", "Palestine, State of", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines (the)", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Republic of North Macedonia", "Romania", "Russian Federation (the)", "Rwanda", "Réunion", "Saint Barthélemy", "Saint Helena, Ascension and Tristan da Cunha", "Saint Kitts and Nevis", "Saint Lucia", "Saint Martin (French part)", "Saint Pierre and Miquelon", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Sint Maarten (Dutch part)", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia and the South Sandwich Islands", "South Sudan", "Spain", "Sri Lanka", "Sudan (the)", "Suriname", "Svalbard and Jan Mayen", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Timor-Leste", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands (the)", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates (the)", "United Kingdom of Great Britain and Northern Ireland (the)", "United States Minor Outlying Islands (the)", "United States of America (the)", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela (Bolivarian Republic of)", "Viet Nam", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna", "Western Sahara", "Yemen", "Zambia", "Zimbabwe", "Åland Islands" ], {}, class: "form-select" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :password, class: "form-label" %>
+              <%= form.password_field :password, class: "form-control", placeholder: "Enter your password" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :password_confirmation, class: "form-label" %>
+              <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm your password" %>
+            </div>
+            <div class="mb-3 text-center">
+              <%= form.submit "Sign up", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

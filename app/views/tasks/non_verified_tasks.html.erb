@@ -1,0 +1,33 @@
+<% content_for(:title, "Non-Verified Tasks | #{Current.user.email}") %>
+
+<div class="container">
+  <h1 class="mb-4">Non-Verified Tasks</h1>
+
+  <div class="row">
+    <% @non_verified_tasks.each do |task| %>
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-header" style="<%= task_status_background(task.status) %>">
+            <h5 class="card-title"><%= task.title %></h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><strong>Description:</strong> <%= task.description %></p>
+            <ul class="list-unstyled">
+              <li><strong>Task ID:</strong> <%= task.id %></li>
+              <li><strong>Status:</strong> <%= status_string(task.status) %></li>
+              <li><strong>Priority:</strong> <%= priority_string(task.priority) %></li>
+              <li><strong>Assigned to:</strong> <%= task.assignee.full_name %></li>
+              <li><strong>Due Date:</strong> <%= task.due_date %></li>
+              <li><strong>Created at:</strong> <%= task.created_at.strftime("%d-%m-%Y %H:%M") %></li>
+              <li><strong>Updated at:</strong> <%= task.updated_at.strftime("%d-%m-%Y %H:%M") %></li>
+            </ul>
+            <% if task.verifier_id.nil? && task.user_id != Current.user.id %>
+              <%= link_to "Approve", approve_task_path(task), data: { turbo_method: :put }, class: "btn btn-success mr-2" %>
+            <% end %>
+            <%= link_to "View Details", show_for_approval_path(task), class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

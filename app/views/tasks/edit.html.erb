@@ -1,0 +1,35 @@
+<% content_for(:title, "Edit task | " + @task.title ) %>
+<h1 class="mb-4">Edit Task</h1>
+
+<div class="container">
+  <%= form_with(model: @task, local: true) do |form| %>
+    <div class="mb-3">
+      <%= form.label :title, class: "form-label" %>
+      <%= form.text_field :title, class: "form-control", disabled: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_area :description, class: "form-control", rows: 5 %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :status, class: "form-label" %>
+      <%= form.select :status, [["Pending", 1]], {}, class: "form-select" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :priority, class: "form-label" %>
+      <%= form.select :priority, [["Low", 1], ["Medium", 2], ["High", 3]], {}, class: "form-select" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :due_date, class: "form-label" %>
+      <%= form.date_field :due_date, class: "form-control" %>
+    </div>
+
+    <div class="mb-3 text-center">
+      <%= form.submit 'Update Task', class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

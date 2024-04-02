@@ -1,0 +1,39 @@
+<% content_for(:title, "Reset Password | Task Manager") %>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="mb-4 text-center">Reset your password?</h1>
+
+          <div class="text-center mb-4">
+            <img src="https://abhishekkamble.s3.ap-south-1.amazonaws.com/portfolio-images/resetpass.png" alt="Logo" class="rounded-circle" style="width: 100px; height: 100px;">
+          </div>
+
+          <%= form_with model: @user, url: password_reset_edit_path(token: params[:token]) do |form| %>
+            <% if @user.errors.any? %>
+              <div class="alert alert-danger">
+                <% @user.errors.full_messages.each do |messages| %>
+                  <div><%= messages %></div>
+                <% end %>
+              <div>
+            <% end %>
+            
+            <div class="mb-3">
+              <%= form.label :password %>
+              <%= form.password_field :password, class: "form-control", placeholder: "Your new password" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :password_confirmation %>
+              <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm new password" %>
+            </div>
+
+            <div class="mb-3 text-center">
+              <%= form.submit "Reset Password", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

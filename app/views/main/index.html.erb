@@ -1,0 +1,26 @@
+<% content_for(:title, "Home | Task Manager") %>
+
+<div class="container mt-5">
+  <div class="jumbotron">
+    <h1 class="display-4">Welcome to Task Manager</h1>
+    <p class="lead">Organize your tasks, prioritize your work, and stay on top of your projects with ease.</p>
+    <hr class="my-4">
+    <p>Sign up now to start managing your tasks efficiently.</p>
+    <%= link_to "Sign Up", signup_path, class: "btn btn-primary btn-lg" %>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <h2>Organize Tasks</h2>
+      <p>Easily create, edit, and organize your tasks with our user-friendly interface. Group tasks into categories, set deadlines, and track progress effortlessly.</p>
+    </div>
+    <div class="col-md-4">
+      <h2>Prioritize Work</h2>
+      <p>Set priorities for your tasks to ensure you focus on what's most important. Our priority system helps you identify critical tasks and allocate time and resources effectively.</p>
+    </div>
+    <div class="col-md-4">
+      <h2>Stay Productive</h2>
+      <p>Boost your productivity and stay on track with your goals. Receive reminders, track deadlines, and collaborate with team members to accomplish more together.</p>
+    </div>
+  </div>
+</div>

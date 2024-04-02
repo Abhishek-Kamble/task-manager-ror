@@ -1,0 +1,2 @@
+<% content_for(:title, "My Tasks | " + Current.user.first_name + " " + Current.user.last_name) %>
+<%= render partial: 'tasks_container', locals: { tasks: @tasks } %>

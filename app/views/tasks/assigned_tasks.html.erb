@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="text-center">
+    <h2>Assigned Tasks</h2>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Sort By
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+        <li><a class="dropdown-item" href="?sort=priority">Priority</a></li>
+        <li><a class="dropdown-item" href="?sort=due_date">Due Date</a></li>
+        <li><a class="dropdown-item" href="?sort=status">Status</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <% if @assigned_tasks.empty? %>
+      <div class="col text-center">
+        <h4 class="text-muted">There are no tasks assigned to you.</h4>
+      </div>
+    <% else %>
+      <% @assigned_tasks.each_with_index do |task, index| %>
+        <div class="col-md-4">
+          <div class="card mb-3" onclick="window.location='<%= show_assigned_task_path(task) %>'" style="cursor: pointer">
+            <div class="card-header" style="<%= task_status_background(task.status) %>"> <!-- Apply background color based on status -->
+              <h5 class="card-title"><%= task.id.to_s + " - " + task.title %></h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text"><%= truncate(task.description, length: 100) %></p>
+              <ul class="list-unstyled">
+                <li><strong>Status:</strong> <%= status_string(task.status) %></li>
+                <li><strong>Priority:</strong> <%= priority_string(task.priority) %></li>
+                <li><strong>Due Date:</strong> <%= task.due_date %></li>
+                <li><strong>Created at:</strong> <%= task.created_at.strftime("%d-%m-%Y %H:%M") %></li>
+                <li><strong>Updated at:</strong> <%= task.updated_at.strftime("%d-%m-%Y %H:%M") %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <% if ((index + 1) % 3 == 0) %>
+          </div><div class="row mt-3">
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

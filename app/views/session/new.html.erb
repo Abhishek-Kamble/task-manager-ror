@@ -1,0 +1,34 @@
+<% content_for(:title, "Sign In | Task Manager") %>
+
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title text-center mb-4">Sign In</h1>
+
+          <!-- Image -->
+          <div class="text-center mb-4">
+            <img src="https://abhishekkamble.s3.ap-south-1.amazonaws.com/portfolio-images/Sample_User_Icon.png" alt="Logo" class="rounded-circle" style="width: 100px; height: 100px;">
+          </div>
+
+          <%= form_with model: @user, url: login_path do |form| %>
+            <div class="mb-3">
+              <%= form.label :email, class: "form-label" %>
+              <%= form.text_field :email, class: "form-control", placeholder: "Enter your email" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :password, class: "form-label" %>
+              <%= form.password_field :password, class: "form-control", placeholder: "Enter your password" %>
+              <%= link_to "Forgot your password?", password_reset_path, class: "d-block mt-2" %>
+            </div>
+            <div class="mb-3 text-center">
+              <%= form.submit "Login", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

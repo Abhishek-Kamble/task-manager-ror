@@ -1,0 +1,74 @@
+<% content_for(:title, "Create Task | #{Current.user.first_name} #{Current.user.last_name}") %>
+
+<div class="container">
+  <h1 class="mb-4">Create Task</h1>
+
+  <%= form_with model: @task, url: tasks_path do |form| %>
+    <div class="mb-3">
+      <%= form.label :title, class: "form-label" %>
+      <%= form.text_field :title, class: "form-control", placeholder: "Enter task title" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_area :description, rows: 5, class: "form-control", placeholder: "Enter task description" %>
+    </div>  
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= form.label :department, class: "form-label" %>
+        <%= form.select :department_id, options_for_select(@departments), {}, class: "form-select", id: "department-select" %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.label :assign_to, class: "form-label" %>
+        <%= form.select :assignee_id, options_for_select([], @task.assignee), {}, class: "form-select", id: "assign-to-user-select" %>
+      </div>
+
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= form.label :status, class: "form-label" %>
+        <%= form.select :status, [["Pending", 1]], {}, class: "form-select"%>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.label :priority, class: "form-label" %>
+        <%= form.select :priority, [["Low", 1], ["Medium", 2], ["High", 3]], {}, class: "form-select" %>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :due_date, class: "form-label" %>
+      <%= form.date_field :due_date, class: "form-control", placeholder: "Select due date" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.submit "Create Task", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  $(document).ready(function() {                      // run script after DOM fully loaded
+    $('#department-select').change(function() {       // event handler
+      var departmentId = $(this).val();
+      $.ajax({
+        url: '/users_by_department',
+        method: 'GET',
+        data: { department_id: departmentId },
+        success: function(data) {
+          var options = '';
+          data.forEach(function(user) {
+            options += '<option value="' + user.id + '">' + user.full_name + ' (' + user.email + ')</option>';
+          });
+          $('#assign-to-user-select').html(options);
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        }
+      });
+    });
+  });
+</script>

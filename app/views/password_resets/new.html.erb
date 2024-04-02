@@ -1,0 +1,27 @@
+<% content_for(:title, "Forgot Password | Task Manager") %>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="mb-4 text-center">Forgot your password?</h1>
+          <div class="text-center mb-4">
+            <img src="https://abhishekkamble.s3.ap-south-1.amazonaws.com/portfolio-images/resetpass.png" alt="Logo" class="rounded-circle" style="width: 100px; height: 100px;">
+          </div>
+          
+          <%= form_with url: password_reset_path do |form| %>
+
+            <div class="mb-3">
+              <%= form.label :email %>
+              <%= form.text_field :email, class: "form-control", placeholder: "abc@email.com" %>
+            </div>
+
+            <div class="mb-3 text-center">
+              <%= form.submit "Reset Password", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
